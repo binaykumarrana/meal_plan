@@ -20,6 +20,8 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails'
 
+gem 'clearance', '~> 1.15.1'
+
 gem 'nokogiri','1.6.8.1'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
@@ -39,6 +41,9 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13.0'
   gem 'selenium-webdriver'
+  gem 'minitest-rails'
+  gem 'factory_girl_rails'
+  gem 'faker'
 end
 
 group :development do
