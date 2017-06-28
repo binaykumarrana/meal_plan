@@ -21,7 +21,7 @@
             <% if signed_in? %>
               <li><%= link_to "Meal Plans", meal_plans_path %></li>
               <li><%= link_to "Recipes", recipes_path %></li>
-              <li><%= link_to "Favorites Meal" %></li>
+              <li><%= link_to "Favorite Recipes" %></li>
               <li><%= link_to "Sign out", sign_out_path, method: :delete %></li>
             <% else %>
               <li><%= link_to "Sign In", sign_in_path %></li>

@@ -1,4 +1,0 @@
-class FavoriteMeals <ApplicationRecord
-
-
-end

@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170606093520) do
+ActiveRecord::Schema.define(version: 20170627124441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "favorite_recipes", force: :cascade do |t|
+    t.integer "recipe_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "favourites", force: :cascade do |t|
+    t.string "favouritable_type"
+    t.bigint "favouritable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["favouritable_type", "favouritable_id"], name: "index_favourites_on_favouritable_type_and_favouritable_id"
+  end
 
   create_table "meal_plans", force: :cascade do |t|
     t.date "start_date", null: false
@@ -42,6 +57,14 @@ ActiveRecord::Schema.define(version: 20170606093520) do
     t.datetime "updated_at", null: false
     t.index ["user_id", "name"], name: "index_recipes_on_user_id_and_name"
     t.index ["user_id"], name: "index_recipes_on_user_id"
+  end
+
+  create_table "recipes_users", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "recipe_id"
+    t.index ["recipe_id"], name: "index_recipes_users_on_recipe_id"
+    t.index ["user_id", "recipe_id"], name: "index_recipes_users_on_user_id_and_recipe_id", unique: true
+    t.index ["user_id"], name: "index_recipes_users_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

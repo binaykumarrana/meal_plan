@@ -5,4 +5,7 @@ Rails.application.routes.draw do
 
   resources :recipes
   resources :meal_plans
+  resources :recipes do
+  	put :favorite, on: :member
+  end
 end

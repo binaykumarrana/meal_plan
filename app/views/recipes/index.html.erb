@@ -11,7 +11,8 @@
           <h3><%= link_to truncate(recipe.name), recipe_path(recipe) %></h3>
           <p><%= truncate(recipe.description, length: 150) %></p>
           <p>
-            <%= link_to "Favorite", edit_recipe_path(recipe), class: "btn btn-primary" %>
+            <%= link_to "favorite",   favorite_recipe_path(recipe, type: "favorite"), class: "btn btn-primary", method: :put %>
+            <%= link_to "unfavorite", favorite_recipe_path(recipe, type: "unfavorite"), class: "btn btn-primary", method: :put %>
             <%= link_to "Edit", edit_recipe_path(recipe), class: "btn btn-primary" %>
             <%= link_to "Delete", recipe_path(recipe), class: "btn btn-primary", data: {
               confirm: "Are you sure you want to delete: #{recipe.name}?",

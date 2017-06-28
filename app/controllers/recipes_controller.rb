@@ -43,7 +43,30 @@
 			recipe.destroy
 			redirect_to recipes_path, notice: "Deleted Recipe: #{recipe.name}"
 		end
+		# Add and remove favorite recipes
+  		# for current_user
+  		def favorite
+    	type = params[:type]
+    	@recipe = current_user.recipes.find(params[:id])
+    	if type == "favorite"
+    		if FavoriteRecipe.where(:recipe_id => @recipe.id).present?
+				redirect_to recipe_path(@recipe), notice: "Already favorited #{@recipe.name}"
+    		else
+    			current_user.favorites << @recipe
+      			redirect_to recipe_path(@recipe), notice: "You favorited #{@recipe.name}"
+    		end
+      		#redirect_to :back, notice: 'You favorited #{@recipe.name}'
 
+    	elsif type == "unfavorite"
+      		current_user.favorites.delete(@recipe)
+      		redirect_to recipe_path(@recipe), notice: "You Unfavorited #{@recipe.name}"
+      		#redirect_to :back, notice: 'Unfavorited #{@recipe.name}'
+
+    	else
+      	# Type missing, nothing happens
+      		redirect_to :back, notice: 'Nothing happened.'
+    	end
+  		end
 		private
 		def recipe_params
 			params.require(:recipe).permit(:name, :description)
