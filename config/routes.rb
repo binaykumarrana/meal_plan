@@ -5,7 +5,9 @@ Rails.application.routes.draw do
 
   resources :recipes
   resources :meal_plans
+  resources :favorite_meals
   resources :recipes do
-  	put :favorite, on: :member
+  	post :favorite, on: :member
   end
+  get '/auth/:provider/callback', to: 'sessions#create'
 end

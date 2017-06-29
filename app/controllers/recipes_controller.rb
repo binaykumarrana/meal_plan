@@ -46,6 +46,7 @@
 		# Add and remove favorite recipes
   		# for current_user
   		def favorite
+  			byebug
     	type = params[:type]
     	@recipe = current_user.recipes.find(params[:id])
     	if type == "favorite"
@@ -64,12 +65,13 @@
 
     	else
       	# Type missing, nothing happens
-      		redirect_to :back, notice: 'Nothing happened.'
+      		redirect_to recipe_path(@recipe), notice: "Issue with favorite!"
     	end
   		end
 		private
 		def recipe_params
-			params.require(:recipe).permit(:name, :description)
+			byebug
+ 			params.require(:recipe).permit(:name, :description)
 		end
 
 	end
